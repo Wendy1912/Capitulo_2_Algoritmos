@@ -1,0 +1,77 @@
+import pygame, sys
+from settings import * 
+from level import Level
+
+#Configuracion de la ventana de juego
+pygame.init()
+screen = pygame.display.set_mode((screen_width,screen_height))
+clock = pygame.time.Clock()
+level = Level(level_map,screen)
+
+# Configuracion de mensaje en pantalla
+color_letra = "#FFB84C"
+colo_letra2 = "#BFDB38"
+
+# Creacion de introduccion al juego
+"""def intro_juego():
+	intro = True
+	while intro:
+		screen.fill("#191825")
+		mensaje_pantalla = ("Zpygame", color_letra, (200,200) )
+		pygame.display.update()
+		clock.tick(15)"""
+
+# Agregar musica
+pygame.mixer.init()
+pygame.mixer.music.load("musica/Goetia.mp3")
+pygame.mixer.music.play(-1)
+
+#mensaje_pantalla = ("Zpygame", color_letra, (200,200) )
+def mensaje_pantalla(mensaje, color, tamaño, posicion, activar):
+	if activar == True:
+		#screen.fill("black")
+		fuente = pygame.font.SysFont(None, tamaño)
+		texto = fuente.render(mensaje, True, color)
+		screen.blit(texto, posicion)
+		#pygame.display.update
+ 	
+
+   
+    
+while True:
+	for event in pygame.event.get():
+		
+		if event.type == pygame.QUIT:
+			pygame.quit()
+			sys.exit()
+	
+	#mensaje_pantalla("*******", color_letra, (300, 90) 
+	#mensaje_pantalla("*******", color_letra, (200, 110) )
+	#pygame.display.flip()
+	screen.fill(color_fondo) 
+	activar = True 
+	mensaje_pantalla("Zpygame", color_letra, 50, (525, 100), activar )
+	mensaje_pantalla("[oooooo]", colo_letra2, 30, (5, 5), activar )
+	
+	
+
+
+	#screen.fill(color_fondo)
+	manejo = True
+	level.run(manejo)
+	pygame.display.update()
+	clock.tick(60)
+	
+	
+	"""1manejo = False
+	keys = pygame.key.get_pressed()
+	if keys[pygame.K_r]:
+		manejo = True
+		level.run(manejo)
+
+	pygame.display.update()	
+	clock.tick(60)"""
+
+
+pygame.display.update()
+clock.tick(60)
